@@ -1,0 +1,60 @@
+.home {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 4rem;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  background: #00c6ff;
+  color: white;
+  cursor: pointer;
+}
+
+/* SERVICES */
+.services {
+  padding: 60px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  padding: 30px;
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+/* ABOUT */
+.about {
+  padding: 60px;
+  background: #eee;
+  text-align: center;
+}
+
+/* FOOTER */
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #222;
+  color: white;
+}
