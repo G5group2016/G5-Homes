@@ -1,43 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <meta charset="utf-8" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <!-- MOBILE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- THEME -->
+  <meta name="theme-color" content="#0A1535" />
+
+  <!-- SEO -->
+  <title>G5 Homes | Luxury Home Construction in Kerala</title>
+
+  <meta
+    name="description"
+    content="G5 Homes is a premium home construction company in Kerala specializing in luxury villas, interiors, modern architecture, and turnkey residential projects."
+  />
+
+  <meta
+    name="keywords"
+    content="G5 Homes, Kerala builders, luxury villas, home construction, interiors, modern homes, architecture, builders in Trivandrum"
+  />
+
+  <meta name="author" content="G5 Homes" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="G5 Homes" />
+
+  <meta
+    property="og:description"
+    content="Luxury home construction company in Kerala."
+  />
+
+  <meta property="og:url" content="https://g5homes.in" />
+
+  <meta property="og:type" content="website" />
+
+  <meta
+    property="og:image"
+    content="https://g5homes.in/favicon.png"
+  />
+
+  <!-- APPLE -->
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+
+  <!-- MANIFEST -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- SCHEMA MARKUP -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "G5 Homes",
+    "image": "https://g5homes.in/favicon.png",
+    "@id": "https://g5homes.in/",
+    "url": "https://g5homes.in/",
+    "telephone": "+91 9562100007",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "NH 66, Edavilakam, Pachalloor, Kovalam, Kerala",
+      "addressLocality": "Thiruvananthapuram",
+      "postalCode": "695027",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 8.4195291,
+      "longitude": 76.9667229
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "08:30",
+      "closes": "05:30"
+    }
+  }
+  </script>
+
+</head>
+
+<body>
+
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+
+  <div id="root"></div>
+
+</body>
+
 </html>
