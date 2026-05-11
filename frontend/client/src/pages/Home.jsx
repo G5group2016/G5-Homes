@@ -415,7 +415,7 @@ export default function G5HomesPage() {
         if (nameErr || emailErr || phoneErr) return;
 
         try {
-            const res = await fetch("https://g5homes.in/api/contact", {
+            const res = await fetch("https://g5-homes.onrender.com/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
