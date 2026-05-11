@@ -1,7 +1,49 @@
-// Contact.js - Updated with Renovation Home option, removed budget and message fields
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+// ── VALIDATION HELPERS ────────────────────────────────────────────────────
+
+const validateName = (value) => {
+  if (!value.trim()) return "Name is required.";
+  if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
+  if (value.trim().length < 2) return "Name must be at least 2 characters.";
+  return "";
+};
+
+const validateEmail = (value) => {
+  if (!value.trim()) return "Email is required.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
+  return "";
+};
+
+const validatePhone = (value) => {
+  const digits = value.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+  if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
+  if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
+  return "";
+};
+
+// ── ERROR MESSAGE COMPONENT ───────────────────────────────────────────────
+function ErrorMsg({ msg }) {
+  if (!msg) return null;
+  return (
+    <div style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+      marginTop: 6,
+      fontSize: 11.5,
+      color: "#C0292A",
+      fontFamily: "'Inter', sans-serif",
+      fontWeight: 500,
+    }}>
+      <span style={{ fontSize: 12 }}>⚠</span>
+      {msg}
+    </div>
+  );
+}
 
 const C = {
     navy: '#0A1535',
@@ -49,7 +91,11 @@ export default function Contact() {
     const [visible, setVisible] = useState({});
     const [hoveredInfo, setHoveredInfo] = useState(null);
     const [hoveredWhy, setHoveredWhy] = useState(null);
-    const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
+    
+    // ── REPLACED formData state with validation ──
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
+    const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
+    const [touched, setTouched] = useState({ name: false, email: false, phone: false });
     const [formFocus, setFormFocus] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
@@ -104,53 +150,81 @@ export default function Contact() {
         transition: `opacity 0.7s cubic-bezier(0.22,0.85,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,0.85,0.36,1) ${delay}s`,
     });
 
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     setSubmitted(true);
-    //     setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-    //     setTimeout(() => setSubmitted(false), 5000);
-    // };
+    // ── FIELD CHANGE HANDLERS ──
+    const handleNameChange = (e) => {
+        const value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+        setFormData((prev) => ({ ...prev, name: value }));
+        if (touched.name) setErrors((prev) => ({ ...prev, name: validateName(value) }));
+    };
 
-    // ── REPLACE your existing handleSubmit in Contact.js with this ──
+    const handlePhoneChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+        setFormData((prev) => ({ ...prev, phone: value }));
+        if (touched.phone) setErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
+    };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch("https://g5-homes.onrender.com/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        service: formData.service,
-      }),
-    });
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({ ...prev, email: value }));
+        if (touched.email) setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
+    };
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || "Submission failed");
+    const handleBlur = (field) => {
+        setTouched((prev) => ({ ...prev, [field]: true }));
+        const validators = { name: validateName, email: validateEmail, phone: validatePhone };
+        setErrors((prev) => ({ ...prev, [field]: validators[field](formData[field]) }));
+    };
 
-    setSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
-  } catch (err) {
-    alert("Something went wrong: " + err.message);
-  }
-};
+    // ── REPLACED handleSubmit with validation ──
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        const nameErr = validateName(formData.name);
+        const emailErr = validateEmail(formData.email);
+        const phoneErr = validatePhone(formData.phone);
+
+        setErrors({ name: nameErr, email: emailErr, phone: phoneErr });
+        setTouched({ name: true, email: true, phone: true });
+
+        if (nameErr || emailErr || phoneErr) return;
+
+        try {
+            const res = await fetch("https://g5homes.in/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: formData.name.trim(),
+                    email: formData.email.trim(),
+                    phone: formData.phone.trim(),
+                    service: formData.service,
+                }),
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Submission failed");
+
+            setSubmitted(true);
+            setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+            setErrors({ name: "", email: "", phone: "" });
+            setTouched({ name: false, email: false, phone: false });
+            setTimeout(() => setSubmitted(false), 5000);
+        } catch (err) {
+            alert("Something went wrong: " + err.message);
+        }
+    };
 
     const inputStyle = (field) => ({
         width: '100%',
         padding: '15px 18px',
         borderRadius: 14,
-        border: `1.5px solid ${formFocus === field ? C.red : 'rgba(14,27,77,0.15)'}`,
+        border: `1.5px solid ${errors[field] && touched[field] ? '#C0292A' : (formFocus === field ? C.red : 'rgba(14,27,77,0.15)')}`,
         fontFamily: "'Inter', sans-serif",
         fontSize: 13.5,
         color: C.darkText,
         background: formFocus === field ? C.white : C.offWhite,
         outline: 'none',
         transition: 'all 0.3s ease',
-        boxShadow: formFocus === field ? `0 0 0 3px rgba(192,41,42,0.08)` : 'none',
+        boxShadow: errors[field] && touched[field] ? '0 0 0 3px rgba(192,41,42,0.1)' : (formFocus === field ? '0 0 0 3px rgba(192,41,42,0.08)' : 'none'),
     });
 
     return (
@@ -332,7 +406,7 @@ const handleSubmit = async (e) => {
                 </div>
             </section>
 
-            {/* ── MAIN FORM + SERVICES LIST (UPDATED: added Renovation Home, removed budget & message) ── */}
+            {/* ── MAIN FORM + SERVICES LIST (UPDATED WITH VALIDATION) ── */}
             <section className="contact-section" style={{ padding: '100px 60px', background: C.offWhite, position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(14,27,77,0.04) 1px, transparent 0)', backgroundSize: '32px 32px', pointerEvents: 'none' }} />
 
@@ -388,7 +462,7 @@ const handleSubmit = async (e) => {
                             </div>
                         </div>
 
-                        {/* Right: Updated Form - Renovation Home added, budget removed, project description removed */}
+                        {/* Right: Updated Form with Validation */}
                         <div ref={ref('formRight')} style={slideRight('formRight')}>
                             <div style={{
                                 background: C.white, borderRadius: 28, padding: '48px 44px',
@@ -419,12 +493,13 @@ const handleSubmit = async (e) => {
                                                     <input
                                                         placeholder="Your full name"
                                                         value={formData.name}
-                                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                        onChange={handleNameChange}
+                                                        onBlur={() => handleBlur('name')}
                                                         onFocus={() => setFormFocus('name')}
-                                                        onBlur={() => setFormFocus('')}
                                                         required
                                                         style={inputStyle('name')}
                                                     />
+                                                    <ErrorMsg msg={touched.name && errors.name} />
                                                 </div>
                                                 <div>
                                                     <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Email *</label>
@@ -432,25 +507,30 @@ const handleSubmit = async (e) => {
                                                         type="email"
                                                         placeholder="your@email.com"
                                                         value={formData.email}
-                                                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                                        onChange={handleEmailChange}
+                                                        onBlur={() => handleBlur('email')}
                                                         onFocus={() => setFormFocus('email')}
-                                                        onBlur={() => setFormFocus('')}
                                                         required
                                                         style={inputStyle('email')}
                                                     />
+                                                    <ErrorMsg msg={touched.email && errors.email} />
                                                 </div>
                                             </div>
 
                                             <div>
-                                                <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Phone Number</label>
+                                                <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Phone Number *</label>
                                                 <input
-                                                    placeholder="+91 XXXXX XXXXX"
+                                                    placeholder="10-digit mobile number"
                                                     value={formData.phone}
-                                                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                                    onChange={handlePhoneChange}
+                                                    onBlur={() => handleBlur('phone')}
                                                     onFocus={() => setFormFocus('phone')}
-                                                    onBlur={() => setFormFocus('')}
+                                                    inputMode="numeric"
+                                                    maxLength={10}
+                                                    required
                                                     style={inputStyle('phone')}
                                                 />
+                                                <ErrorMsg msg={touched.phone && errors.phone} />
                                             </div>
 
                                             <div>

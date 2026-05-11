@@ -10,6 +10,50 @@ import luxvilla from '../assets/luxvilla.webp';
 import smart from '../assets/smarthome.webp';
 import interior from '../assets/interiors.webp';
 import abouthome from '../assets/abouthome.webp';
+
+// ── VALIDATION HELPERS ────────────────────────────────────────────────────
+
+const validateName = (value) => {
+  if (!value.trim()) return "Name is required.";
+  if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
+  if (value.trim().length < 2) return "Name must be at least 2 characters.";
+  return "";
+};
+
+const validateEmail = (value) => {
+  if (!value.trim()) return "Email is required.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
+  return "";
+};
+
+const validatePhone = (value) => {
+  const digits = value.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+  if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
+  if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
+  return "";
+};
+
+// ── ERROR MESSAGE COMPONENT ───────────────────────────────────────────────
+function ErrorMsg({ msg }) {
+  if (!msg) return null;
+  return (
+    <div style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+      marginTop: 6,
+      fontSize: 11.5,
+      color: "#C0292A",
+      fontFamily: "'Inter', sans-serif",
+      fontWeight: 500,
+    }}>
+      <span style={{ fontSize: 12 }}>⚠</span>
+      {msg}
+    </div>
+  );
+}
+
 // ── DESIGN TOKENS ──────────────────────────────────────────────
 const C = {
     navy: '#0A1535',
@@ -231,7 +275,10 @@ export default function G5HomesPage() {
     const [visible, setVisible] = useState({});
     const [hoveredMilestone, setHoveredMilestone] = useState(null);
     const [cursorActive, setCursorActive] = useState(false);
+    // ── UPDATED formData state with validation ──
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', type: 'buy', message: '', service: '' });
+    const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
+    const [touched, setTouched] = useState({ name: false, email: false, phone: false });
     const [statsInView, setStatsInView] = useState(false);
     const [heroAnimComplete, setHeroAnimComplete] = useState(false);
     const [hoveredService, setHoveredService] = useState(null);
@@ -241,6 +288,31 @@ export default function G5HomesPage() {
     const sectionRefs = useRef({});
     const statsRef = useRef(null);
     const slideInterval = useRef(null);
+
+    // ── FIELD CHANGE HANDLERS ──
+    const handleNameChange = (e) => {
+        const value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+        setFormData((prev) => ({ ...prev, name: value }));
+        if (touched.name) setErrors((prev) => ({ ...prev, name: validateName(value) }));
+    };
+
+    const handlePhoneChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+        setFormData((prev) => ({ ...prev, phone: value }));
+        if (touched.phone) setErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
+    };
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({ ...prev, email: value }));
+        if (touched.email) setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
+    };
+
+    const handleBlur = (field) => {
+        setTouched((prev) => ({ ...prev, [field]: true }));
+        const validators = { name: validateName, email: validateEmail, phone: validatePhone };
+        setErrors((prev) => ({ ...prev, [field]: validators[field](formData[field]) }));
+    };
 
     // Scroll
     useEffect(() => {
@@ -329,16 +401,27 @@ export default function G5HomesPage() {
         transition: `opacity 0.6s cubic-bezier(0.22, 0.85, 0.36, 1) ${delay}s, transform 0.6s cubic-bezier(0.22, 0.85, 0.36, 1) ${delay}s`,
     });
 
+    // ── REPLACED handleSubmit with validation ──
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const nameErr = validateName(formData.name);
+        const emailErr = validateEmail(formData.email);
+        const phoneErr = validatePhone(formData.phone);
+
+        setErrors({ name: nameErr, email: emailErr, phone: phoneErr });
+        setTouched({ name: true, email: true, phone: true });
+
+        if (nameErr || emailErr || phoneErr) return;
+
         try {
-            const res = await fetch("https://g5-homes.onrender.com/api/contact", {
+            const res = await fetch("https://g5homes.in/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
+                    name: formData.name.trim(),
+                    email: formData.email.trim(),
+                    phone: formData.phone.trim(),
                     service: formData.service || formData.type,
                 }),
             });
@@ -348,12 +431,29 @@ export default function G5HomesPage() {
 
             alert("Thank you! Our team will contact you within 24 hours.");
             setFormData({ name: "", email: "", phone: "", type: "buy", message: "", service: "" });
+            setErrors({ name: "", email: "", phone: "" });
+            setTouched({ name: false, email: false, phone: false });
         } catch (err) {
             alert("Something went wrong: " + err.message);
         }
     };
 
     const slide = heroSlides[currentSlide];
+
+    // Input style helper
+    const inputStyle = (field) => ({
+        width: '100%',
+        padding: '15px 18px',
+        borderRadius: 12,
+        border: `1.5px solid ${errors[field] && touched[field] ? '#C0292A' : 'rgba(14,27,77,0.15)'}`,
+        fontFamily: "'Inter', sans-serif",
+        fontSize: 13.5,
+        color: C.darkText,
+        background: C.white,
+        outline: 'none',
+        transition: 'all 0.3s ease',
+        boxShadow: errors[field] && touched[field] ? '0 0 0 3px rgba(192,41,42,0.1)' : 'none',
+    });
 
     return (
         <div style={{ fontFamily: "'Inter', 'Poppins', sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
@@ -1612,7 +1712,7 @@ export default function G5HomesPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════
-          CONTACT SECTION
+          CONTACT SECTION (UPDATED WITH VALIDATION FIELDS)
       ══════════════════════════════════════════════════════════ */}
 
             <section id="contact" style={{ padding: '110px 60px', background: C.white, position: 'relative', overflow: 'hidden' }}>
@@ -1640,7 +1740,7 @@ export default function G5HomesPage() {
                         </div>
                     </div>
 
-                    {/* UPDATED FORM: added Renovation Home, removed budget and project description */}
+                    {/* UPDATED FORM with validation */}
                     <div ref={ref('form')} style={{ ...slideInRight('form'), background: C.offWhite, padding: '44px 40px', borderRadius: 20, border: `1px solid rgba(14,27,77,0.1)`, boxShadow: '0 24px 80px rgba(10,21,53,0.08)', position: 'relative', overflow: 'hidden' }}>
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${C.red},${C.gold},${C.red})` }} />
                         <h3 style={{ fontSize: '1.6rem', fontWeight: 600, color: C.navy, marginBottom: 6, fontFamily: "'Playfair Display', serif" }}>Send an Inquiry</h3>
@@ -1648,21 +1748,72 @@ export default function G5HomesPage() {
 
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                                <input className="g5-input" placeholder="Full Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required style={{ padding: '15px 18px', borderRadius: 12, border: '1px solid rgba(14,27,77,0.15)', fontFamily: "'Inter', sans-serif" }} />
-                                <input className="g5-input" placeholder="Email Address" type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} required style={{ padding: '15px 18px', borderRadius: 12, border: '1px solid rgba(14,27,77,0.15)', fontFamily: "'Inter', sans-serif" }} />
+                                <div>
+                                    <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Full Name *</label>
+                                    <input
+                                        placeholder="Your full name"
+                                        value={formData.name}
+                                        onChange={handleNameChange}
+                                        onBlur={() => handleBlur('name')}
+                                        required
+                                        style={inputStyle('name')}
+                                    />
+                                    <ErrorMsg msg={touched.name && errors.name} />
+                                </div>
+                                <div>
+                                    <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Email *</label>
+                                    <input
+                                        type="email"
+                                        placeholder="your@email.com"
+                                        value={formData.email}
+                                        onChange={handleEmailChange}
+                                        onBlur={() => handleBlur('email')}
+                                        required
+                                        style={inputStyle('email')}
+                                    />
+                                    <ErrorMsg msg={touched.email && errors.email} />
+                                </div>
                             </div>
-                            <input className="g5-input" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} style={{ padding: '15px 18px', borderRadius: 12, border: '1px solid rgba(14,27,77,0.15)', fontFamily: "'Inter', sans-serif" }} />
 
-                            <select className="g5-input" value={formData.service} onChange={e => setFormData({ ...formData, service: e.target.value })} style={{ padding: '15px 18px', borderRadius: 12, border: '1px solid rgba(14,27,77,0.15)', fontFamily: "'Inter', sans-serif" }}>
-                                <option value="">Select a service</option>
-                                <option value="custom-home">Custom Home Construction</option>
-                                <option value="luxury-villa">Luxury Villa Planning & Design</option>
-                                <option value="interior">Interior Design & Landscaping</option>
-                                <option value="cost-estimate">Construction Cost Estimation</option>
-                                <option value="turnkey">Turnkey Home Construction</option>
-                                <option value="smart-home">Smart & Sustainable Home Development</option>
-                                <option value="renovation">Renovation Home</option>
-                            </select>
+                            <div>
+                                <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Phone Number *</label>
+                                <input
+                                    placeholder="10-digit mobile number"
+                                    value={formData.phone}
+                                    onChange={handlePhoneChange}
+                                    onBlur={() => handleBlur('phone')}
+                                    inputMode="numeric"
+                                    maxLength={10}
+                                    required
+                                    style={inputStyle('phone')}
+                                />
+                                <ErrorMsg msg={touched.phone && errors.phone} />
+                            </div>
+
+                            <div>
+                                <label style={{ fontSize: 11, fontWeight: 600, color: '#4A5270', letterSpacing: 1, textTransform: 'uppercase', fontFamily: "'Inter', sans-serif", display: 'block', marginBottom: 6 }}>Service Interested In</label>
+                                <select
+                                    value={formData.service}
+                                    onChange={e => setFormData({ ...formData, service: e.target.value })}
+                                    style={{
+                                        width: '100%',
+                                        padding: '15px 18px',
+                                        borderRadius: 12,
+                                        border: '1px solid rgba(14,27,77,0.15)',
+                                        fontFamily: "'Inter', sans-serif",
+                                        background: C.white,
+                                    }}
+                                >
+                                    <option value="">Select a service</option>
+                                    <option value="custom-home">Custom Home Construction</option>
+                                    <option value="luxury-villa">Luxury Villa Planning & Design</option>
+                                    <option value="interior">Interior Design & Landscaping</option>
+                                    <option value="cost-estimate">Construction Cost Estimation</option>
+                                    <option value="turnkey">Turnkey Home Construction</option>
+                                    <option value="smart-home">Smart & Sustainable Home Development</option>
+                                    <option value="renovation">Renovation Home</option>
+                                </select>
+                            </div>
 
                             <button type="submit" className="btn-premium" style={{ padding: '17px', fontSize: 11, width: '100%', borderRadius: 40, marginTop: 4, border: 'none', cursor: 'pointer', color: C.white }}
                                 onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)}>
