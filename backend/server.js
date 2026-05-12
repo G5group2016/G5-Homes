@@ -9,9 +9,20 @@ connectDB();
 const app = express();
 
 // Allow requests from your React frontend
+// app.use(
+//   cors({
+//     origin: process.env.FRONTEND_URL || "*",
+//     methods: ["GET", "POST", "PATCH", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*",
+    origin: [
+      "https://www.g5homes.in",
+      "https://g5homes.in",
+    ],
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
