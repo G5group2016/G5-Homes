@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import G5Logo from './G5Logo';
+import { FaInstagram, FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
 
 const C = {
     navy: '#0A1535',
@@ -227,6 +228,129 @@ export default function Footer() {
                             }}
                         >
                             "Strong Structures, Stronger Trust."
+                        </div>
+
+
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '14px',
+                                marginTop: '24px',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <a
+                                href="https://www.instagram.com/g5homesbuilders/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    width: 38,
+                                    height: 38,
+                                    borderRadius: '50%',
+                                    border: `1px solid rgba(255,255,255,0.15)`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#FFFFFF',
+                                    transition: '0.3s ease',
+                                    textDecoration: 'none',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = '#C9A84C';
+                                    e.currentTarget.style.transform = 'translateY(-3px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.transform = 'translateY(0px)';
+                                }}
+                            >
+                                <FaInstagram size={16} />
+                            </a>
+
+
+                            <a
+                                href="https://www.facebook.com/share/18QZi7uC7V/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    width: 38,
+                                    height: 38,
+                                    borderRadius: '50%',
+                                    border: `1px solid rgba(255,255,255,0.15)`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#FFFFFF',
+                                    transition: '0.3s ease',
+                                    textDecoration: 'none',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = '#C9A84C';
+                                    e.currentTarget.style.transform = 'translateY(-3px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.transform = 'translateY(0px)';
+                                }}
+                            >
+                                <FaFacebookF size={15} />
+                            </a>
+
+                            <a
+                                href="https://x.com/g5homesbuilders?s=21"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    width: 38,
+                                    height: 38,
+                                    borderRadius: '50%',
+                                    border: `1px solid rgba(255,255,255,0.15)`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#FFFFFF',
+                                    transition: '0.3s ease',
+                                    textDecoration: 'none',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = '#C9A84C';
+                                    e.currentTarget.style.transform = 'translateY(-3px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.transform = 'translateY(0px)';
+                                }}
+                            >
+                                <FaXTwitter size={15} />
+                            </a>
+
+                            <a
+                                href="https://share.google/vHqwEY0i7ue0vDRrC"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    width: 38,
+                                    height: 38,
+                                    borderRadius: '50%',
+                                    border: `1px solid rgba(255,255,255,0.15)`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#FFFFFF',
+                                    transition: '0.3s ease',
+                                    textDecoration: 'none',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = '#C9A84C';
+                                    e.currentTarget.style.transform = 'translateY(-3px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.transform = 'translateY(0px)';
+                                }}
+                            >
+                                <FaLinkedinIn size={15} />
+                            </a>
                         </div>
 
                     </div>
