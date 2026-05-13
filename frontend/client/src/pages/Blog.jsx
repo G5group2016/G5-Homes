@@ -398,7 +398,7 @@ export default function Blog() {
             </section>
 
             {/* ── NEWSLETTER SECTION ── */}
-            <section style={{ padding: '80px 60px', background: C.offWhite, textAlign: 'center' }}>
+            {/* <section style={{ padding: '80px 60px', background: C.offWhite, textAlign: 'center' }}>
                 <div style={{ maxWidth: 680, margin: '0 auto' }}>
                     <div style={{ fontSize: 10, letterSpacing: 6, color: C.red, textTransform: 'uppercase', marginBottom: 14, fontWeight: 700, fontFamily: "'Inter', sans-serif" }}>Stay Updated</div>
                     <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.5rem)', fontWeight: 700, color: C.navy, fontFamily: "'Playfair Display', serif", marginBottom: 16 }}>
@@ -446,7 +446,7 @@ export default function Blog() {
                         </button>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <Footer />
 
