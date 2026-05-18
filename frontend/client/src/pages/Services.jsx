@@ -9,6 +9,22 @@ import smart from '../assets/smarthome2.webp';
 import renovation from '../assets/renovation2.webp';
 import outdoor from '../assets/outdoor2.webp';
 
+// Image optimization helper
+const ResponsiveImage = ({ src, alt, style, onMouseEnter, onMouseLeave, priority = false }) => {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      style={style}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding={priority ? "sync" : "async"}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    />
+  );
+};
+
 const C = {
     navy: '#0A1535',
     navyMid: '#0E1B4D',
@@ -363,6 +379,8 @@ export default function ServicesPage() {
                                             objectFit: 'cover',
                                             transition: 'transform 0.6s ease',
                                         }}
+                                        loading="lazy"
+                                        decoding="async"
                                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                                     />

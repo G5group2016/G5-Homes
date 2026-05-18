@@ -48,6 +48,20 @@
   <!-- MANIFEST -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
+  <!-- ========== PERFORMANCE OPTIMIZATIONS ========== -->
+  
+  <!-- PRECONNECT for external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://g5-homes.onrender.com" />
+  
+  <!-- PRELOAD LCP IMAGE - Logo appears immediately -->
+  <link rel="preload" as="image" href="%PUBLIC_URL%/G5-Homes-Logo.webp" fetchpriority="high" />
+  
+  <!-- DNS PREFETCH for faster API calls -->
+  <link rel="dns-prefetch" href="https://g5-homes.onrender.com" />
+  <link rel="dns-prefetch" href="https://wa.me" />
+
   <!-- SCHEMA MARKUP -->
 
   <script type="application/ld+json">

@@ -6,6 +6,20 @@ import aihome from '../assets/aihome.webp';
 import listening from '../assets/listening.webp';
 import renovation from '../assets/renovation.webp';
 
+// Image optimization helper
+const ResponsiveImage = ({ src, alt, style, priority = false }) => {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      style={style}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding={priority ? "sync" : "async"}
+    />
+  );
+};
+
 const C = {
     navy: '#0A1535',
     navyMid: '#0E1B4D',
@@ -332,6 +346,8 @@ export default function Blog() {
                                             objectFit: 'cover',
                                             transition: 'transform 0.6s ease',
                                         }}
+                                        loading="lazy"
+                                        decoding="async"
                                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                                     />
@@ -397,7 +413,7 @@ export default function Blog() {
                 </div>
             </section>
 
-            {/* ── NEWSLETTER SECTION ── */}
+            {/* ── NEWSLETTER SECTION (Commented out as in original) ── */}
             {/* <section style={{ padding: '80px 60px', background: C.offWhite, textAlign: 'center' }}>
                 <div style={{ maxWidth: 680, margin: '0 auto' }}>
                     <div style={{ fontSize: 10, letterSpacing: 6, color: C.red, textTransform: 'uppercase', marginBottom: 14, fontWeight: 700, fontFamily: "'Inter', sans-serif" }}>Stay Updated</div>
@@ -513,6 +529,9 @@ export default function Blog() {
                             src={selectedPost.image}
                             alt={selectedPost.title}
                             style={{ width: '100%', height: 420, objectFit: 'cover' }}
+                            loading="eager"
+                            fetchPriority="high"
+                            decoding="sync"
                         />
                         <div style={{ padding: '40px 48px' }}>
                             <div style={{ display: 'flex', gap: 16, marginBottom: 20, fontSize: 12, color: C.midGray, fontFamily: "'Inter', sans-serif", letterSpacing: 0.5 }}>

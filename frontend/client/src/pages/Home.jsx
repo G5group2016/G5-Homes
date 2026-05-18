@@ -11,6 +11,23 @@ import smart from '../assets/smarthome.webp';
 import interior from '../assets/interiors.webp';
 import abouthome from '../assets/abouthome.webp';
 
+// Image optimization helper
+const ResponsiveImage = ({ src, alt, style, className, onMouseEnter, onMouseLeave, priority = false }) => {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      style={style}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding={priority ? "sync" : "async"}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    />
+  );
+};
+
 // ── VALIDATION HELPERS ────────────────────────────────────────────────────
 
 const validateName = (value) => {
@@ -1373,6 +1390,8 @@ export default function G5HomesPage() {
                                             transition: 'transform 0.6s ease',
                                             transform: hoveredProject === idx ? 'scale(1.08)' : 'scale(1)'
                                         }}
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                     <div style={{
                                         position: 'absolute',
@@ -1614,6 +1633,8 @@ export default function G5HomesPage() {
                                     src={abouthome}
                                     alt="G5 Homes Construction"
                                     style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.7s ease' }}
+                                    loading="lazy"
+                                    decoding="async"
                                     onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
                                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                                 />
