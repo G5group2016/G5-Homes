@@ -10,65 +10,66 @@ import luxvilla from '../assets/luxvilla.webp';
 import smart from '../assets/smarthome.webp';
 import interior from '../assets/interiors.webp';
 import abouthome from '../assets/abouthome.webp';
+import { Helmet } from "react-helmet";
 
 // Image optimization helper
 const ResponsiveImage = ({ src, alt, style, className, onMouseEnter, onMouseLeave, priority = false }) => {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      style={style}
-      loading={priority ? "eager" : "lazy"}
-      fetchPriority={priority ? "high" : "auto"}
-      decoding={priority ? "sync" : "async"}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    />
-  );
+    return (
+        <img
+            src={src}
+            alt={alt}
+            className={className}
+            style={style}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding={priority ? "sync" : "async"}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        />
+    );
 };
 
 // ── VALIDATION HELPERS ────────────────────────────────────────────────────
 
 const validateName = (value) => {
-  if (!value.trim()) return "Name is required.";
-  if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
-  if (value.trim().length < 2) return "Name must be at least 2 characters.";
-  return "";
+    if (!value.trim()) return "Name is required.";
+    if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
+    if (value.trim().length < 2) return "Name must be at least 2 characters.";
+    return "";
 };
 
 const validateEmail = (value) => {
-  if (!value.trim()) return "Email is required.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
-  return "";
+    if (!value.trim()) return "Email is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
+    return "";
 };
 
 const validatePhone = (value) => {
-  const digits = value.replace(/\D/g, "");
-  if (!digits) return "Phone number is required.";
-  if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
-  if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
-  return "";
+    const digits = value.replace(/\D/g, "");
+    if (!digits) return "Phone number is required.";
+    if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
+    if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
+    return "";
 };
 
 // ── ERROR MESSAGE COMPONENT ───────────────────────────────────────────────
 function ErrorMsg({ msg }) {
-  if (!msg) return null;
-  return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      gap: 6,
-      marginTop: 6,
-      fontSize: 11.5,
-      color: "#C0292A",
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 500,
-    }}>
-      <span style={{ fontSize: 12 }}>⚠</span>
-      {msg}
-    </div>
-  );
+    if (!msg) return null;
+    return (
+        <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            marginTop: 6,
+            fontSize: 11.5,
+            color: "#C0292A",
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 500,
+        }}>
+            <span style={{ fontSize: 12 }}>⚠</span>
+            {msg}
+        </div>
+    );
 }
 
 // ── DESIGN TOKENS ──────────────────────────────────────────────
@@ -474,6 +475,37 @@ export default function G5HomesPage() {
 
     return (
         <div style={{ fontFamily: "'Inter', 'Poppins', sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
+
+            <Helmet>
+                <title>Best Home Builders in Trivandrum | G5 Homes</title>
+
+                <meta
+                    name="description"
+                    content="G5 Homes is a premium construction company in Trivandrum offering smart homes, custom villas, interior designs, and luxury home developments in Kerala."
+                />
+
+                <meta
+                    name="keywords"
+                    content="builders in Trivandrum, developers in Trivandrum, home construction company Kerala, luxury villa builders Kerala, custom home builders Trivandrum, interior design Trivandrum, G5 Homes"
+                />
+
+                <link rel="canonical" href="https://g5homes.in/" />
+
+                <meta property="og:title" content="Best Home Builders in Trivandrum | G5 Homes" />
+                <meta
+                    property="og:description"
+                    content="Premium construction company in Trivandrum offering smart homes, custom villas, interior designs, and luxury home developments."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://g5homes.in/" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Best Home Builders in Trivandrum | G5 Homes" />
+                <meta
+                    name="twitter:description"
+                    content="Premium construction company in Trivandrum offering smart homes, custom villas, interior designs, and luxury home developments."
+                />
+            </Helmet>
 
             {/* ── GLOBAL STYLES ── */}
             <style>{`

@@ -1,48 +1,50 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Helmet } from "react-helmet";
+
 
 // ── VALIDATION HELPERS ────────────────────────────────────────────────────
 
 const validateName = (value) => {
-  if (!value.trim()) return "Name is required.";
-  if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
-  if (value.trim().length < 2) return "Name must be at least 2 characters.";
-  return "";
+    if (!value.trim()) return "Name is required.";
+    if (/[^a-zA-Z\s]/.test(value)) return "Name must not contain numbers or special characters.";
+    if (value.trim().length < 2) return "Name must be at least 2 characters.";
+    return "";
 };
 
 const validateEmail = (value) => {
-  if (!value.trim()) return "Email is required.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
-  return "";
+    if (!value.trim()) return "Email is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid email address.";
+    return "";
 };
 
 const validatePhone = (value) => {
-  const digits = value.replace(/\D/g, "");
-  if (!digits) return "Phone number is required.";
-  if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
-  if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
-  return "";
+    const digits = value.replace(/\D/g, "");
+    if (!digits) return "Phone number is required.";
+    if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
+    if (!/^[6-9]/.test(digits)) return "Enter a valid Indian mobile number (starts with 6–9).";
+    return "";
 };
 
 // ── ERROR MESSAGE COMPONENT ───────────────────────────────────────────────
 function ErrorMsg({ msg }) {
-  if (!msg) return null;
-  return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      gap: 6,
-      marginTop: 6,
-      fontSize: 11.5,
-      color: "#C0292A",
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: 500,
-    }}>
-      <span style={{ fontSize: 12 }}>⚠</span>
-      {msg}
-    </div>
-  );
+    if (!msg) return null;
+    return (
+        <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            marginTop: 6,
+            fontSize: 11.5,
+            color: "#C0292A",
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 500,
+        }}>
+            <span style={{ fontSize: 12 }}>⚠</span>
+            {msg}
+        </div>
+    );
 }
 
 const C = {
@@ -91,7 +93,7 @@ export default function Contact() {
     const [visible, setVisible] = useState({});
     const [hoveredInfo, setHoveredInfo] = useState(null);
     const [hoveredWhy, setHoveredWhy] = useState(null);
-    
+
     // ── REPLACED formData state with validation ──
     const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
     const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
@@ -229,6 +231,24 @@ export default function Contact() {
 
     return (
         <div style={{ fontFamily: "'Inter','Poppins',sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
+
+            <Helmet>
+                <title>
+                    Best Interior Designers in Trivandrum, Kerala | G5 Homes
+                </title>
+
+                <meta
+                    name="description"
+                    content="G5 Homes offers luxury interior design services in Trivandrum, Kerala, creating stylish living spaces, premium interiors, custom homes, and modern villa designs."
+                />
+
+                <meta
+                    name="keywords"
+                    content="interior designers Trivandrum, luxury interiors Kerala, home interior designers Trivandrum, villa interior design Kerala, custom home interiors, G5 Homes"
+                />
+
+                <link rel="canonical" href="https://g5homes.in/contact" />
+            </Helmet>
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }

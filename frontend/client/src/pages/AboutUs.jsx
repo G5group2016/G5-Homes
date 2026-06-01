@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import custom2 from '../assets/custom3.webp';
+import { Helmet } from "react-helmet";
+
 
 const C = {
     navy: '#0A1535',
@@ -129,6 +131,49 @@ export default function AboutUs() {
 
     return (
         <div style={{ fontFamily: "'Inter','Poppins',sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
+
+            <Helmet>
+                <title>Premium Home Developers in Trivandrum, Kerala | G5 Homes</title>
+
+                <meta
+                    name="description"
+                    content="Leading trusted construction company in Trivandrum, delivering custom homes, premium interiors, luxury villas, and modern smart home projects across Kerala."
+                />
+
+                <meta
+                    name="keywords"
+                    content="premium home developers Trivandrum, home builders Trivandrum, construction company Trivandrum, luxury villa builders Kerala, custom home builders Kerala, smart home builders Kerala, interior design Trivandrum, G5 Homes"
+                />
+
+                <meta name="robots" content="index, follow" />
+
+                <link rel="canonical" href="https://g5homes.in/about" />
+
+                <meta
+                    property="og:title"
+                    content="Premium Home Developers in Trivandrum, Kerala | G5 Homes"
+                />
+
+                <meta
+                    property="og:description"
+                    content="Leading trusted construction company in Trivandrum, delivering custom homes, premium interiors, luxury villas, and modern smart home projects across Kerala."
+                />
+
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://g5homes.in/about" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+
+                <meta
+                    name="twitter:title"
+                    content="Premium Home Developers in Trivandrum, Kerala | G5 Homes"
+                />
+
+                <meta
+                    name="twitter:description"
+                    content="Leading trusted construction company in Trivandrum, delivering custom homes, premium interiors, luxury villas, and modern smart home projects across Kerala."
+                />
+            </Helmet>
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -295,7 +340,7 @@ export default function AboutUs() {
             <div style={{ background: `linear-gradient(90deg,${C.navy},${C.navyMid},${C.navy})`, padding: '13px 0', overflow: 'hidden', borderTop: `1px solid rgba(201,168,76,0.2)`, borderBottom: `1px solid rgba(201,168,76,0.2)` }}>
                 <div className="marquee-inner">
                     {[...Array(2)].map((_, r) => (
-                        ['Quality Construction', '◆', 'Luxury Villas', '◆', 'Smart Homes', '◆', 'Interior Design', '◆', 'Turnkey Projects', '◆', 'Est. 2019', '◆','Strong Trust', '◆', 'Trivandrum, Kerala', '◆'].map((t, i) => (
+                        ['Quality Construction', '◆', 'Luxury Villas', '◆', 'Smart Homes', '◆', 'Interior Design', '◆', 'Turnkey Projects', '◆', 'Est. 2019', '◆', 'Strong Trust', '◆', 'Trivandrum, Kerala', '◆'].map((t, i) => (
                             <span key={`${r}-${i}`} style={{ marginRight: 48, fontSize: 11, letterSpacing: 3, color: t === '◆' ? C.gold : 'rgba(255,255,255,0.45)', fontWeight: t === '◆' ? 700 : 400, textTransform: 'uppercase', whiteSpace: 'nowrap', fontFamily: "'Inter', sans-serif" }}>{t}</span>
                         ))
                     ))}

@@ -5,19 +5,21 @@ import modern from '../assets/modernhome.webp';
 import aihome from '../assets/aihome.webp';
 import listening from '../assets/listening.webp';
 import renovation from '../assets/renovation.webp';
+import { Helmet } from "react-helmet";
+
 
 // Image optimization helper
 const ResponsiveImage = ({ src, alt, style, priority = false }) => {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      style={style}
-      loading={priority ? "eager" : "lazy"}
-      fetchPriority={priority ? "high" : "auto"}
-      decoding={priority ? "sync" : "async"}
-    />
-  );
+    return (
+        <img
+            src={src}
+            alt={alt}
+            style={style}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding={priority ? "sync" : "async"}
+        />
+    );
 };
 
 const C = {
@@ -177,6 +179,49 @@ export default function Blog() {
 
     return (
         <div style={{ fontFamily: "'Inter','Poppins',sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
+
+            <Helmet>
+                <title>
+                    Best Custom Home Builders in Trivandrum, Kerala | G5 Homes
+                </title>
+
+                <meta
+                    name="description"
+                    content="G5 Homes is a trusted custom home builder in Trivandrum specializing in luxury villas, premium interiors, smart homes, and quality home construction across Kerala."
+                />
+
+                <meta
+                    name="keywords"
+                    content="custom home builders Trivandrum, home builders Kerala, luxury villa builders Trivandrum, smart home construction Kerala, premium home builders, house construction Trivandrum, G5 Homes"
+                />
+
+                <meta name="robots" content="index, follow" />
+
+                <link rel="canonical" href="https://g5homes.in/blog" />
+
+                <meta
+                    property="og:title"
+                    content="Best Custom Home Builders in Trivandrum, Kerala | G5 Homes"
+                />
+
+                <meta
+                    property="og:description"
+                    content="G5 Homes is a trusted custom home builder in Trivandrum specializing in luxury villas, premium interiors, smart homes, and quality home construction across Kerala."
+                />
+
+                <meta property="og:url" content="https://g5homes.in/blog" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta
+                    name="twitter:title"
+                    content="Best Custom Home Builders in Trivandrum, Kerala | G5 Homes"
+                />
+                <meta
+                    name="twitter:description"
+                    content="G5 Homes is a trusted custom home builder in Trivandrum specializing in luxury villas, premium interiors, smart homes, and quality home construction across Kerala."
+                />
+            </Helmet>
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
                 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }

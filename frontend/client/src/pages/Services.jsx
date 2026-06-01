@@ -8,21 +8,23 @@ import interior from '../assets/interiors.webp';
 import smart from '../assets/smarthome2.webp';
 import renovation from '../assets/renovation2.webp';
 import outdoor from '../assets/outdoor2.webp';
+import { Helmet } from "react-helmet";
+
 
 // Image optimization helper
 const ResponsiveImage = ({ src, alt, style, onMouseEnter, onMouseLeave, priority = false }) => {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      style={style}
-      loading={priority ? "eager" : "lazy"}
-      fetchPriority={priority ? "high" : "auto"}
-      decoding={priority ? "sync" : "async"}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    />
-  );
+    return (
+        <img
+            src={src}
+            alt={alt}
+            style={style}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding={priority ? "sync" : "async"}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        />
+    );
 };
 
 const C = {
@@ -160,6 +162,42 @@ export default function ServicesPage() {
 
     return (
         <div style={{ fontFamily: "'Inter','Poppins',sans-serif", background: C.white, color: C.darkText, overflowX: 'hidden' }}>
+
+            <Helmet>
+                <title>
+                    Top Construction Company in Trivandrum, Kerala | G5 Homes
+                </title>
+
+                <meta
+                    name="description"
+                    content="G5 Homes is a trusted construction company in Trivandrum specializing in premium and affordable homes, luxury villas, smart living solutions, modern architecture, and custom home construction across Kerala."
+                />
+
+                <link rel="canonical" href="https://g5homes.in/services" />
+
+                <meta
+                    property="og:title"
+                    content="Top Construction Company in Trivandrum, Kerala | G5 Homes"
+                />
+
+                <meta
+                    property="og:description"
+                    content="G5 Homes is a trusted construction company in Trivandrum specializing in premium and affordable homes, luxury villas, smart living solutions, modern architecture, and custom home construction across Kerala."
+                />
+
+                <meta property="og:url" content="https://g5homes.in/services" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta
+                    name="twitter:title"
+                    content="Top Construction Company in Trivandrum, Kerala | G5 Homes"
+                />
+                <meta
+                    name="twitter:description"
+                    content="G5 Homes is a trusted construction company in Trivandrum specializing in premium and affordable homes, luxury villas, smart living solutions, modern architecture, and custom home construction across Kerala."
+                />
+            </Helmet>
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
                 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
