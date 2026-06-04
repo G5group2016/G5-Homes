@@ -61,7 +61,7 @@ const services = [
     },
     {
         num: '03',
-        title: 'Apartment Development',
+        title: 'Flat & Apartment Development',
         desc: 'Modern apartment communities designed for comfort, elegance, and future-ready living.',
         points: ['Community planning', 'Modern architecture', 'Functional layouts', 'Premium amenities'],
         image: apartment,

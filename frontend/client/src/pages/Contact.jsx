@@ -64,7 +64,7 @@ const C = {
 };
 
 const contactInfo = [
-    { icon: '📍', label: 'Location', value: 'Head Office: G5 Homes, NH 66, Edavilakam, Pachalloor, Tvm, Kerala, India- 695027', sub: 'Visit our office' },
+    { icon: '📍', label: 'Location', value: 'Head Office: G5 Group, NH 66, Edavilakam, Pachalloor, Tvm, Kerala, India- 695027', sub: 'Visit our office' },
     { icon: '📞', label: 'Phone', value: '+91 9562100007', sub: 'Mon – Sat: 9AM – 5:30PM IST' },
     { icon: '📧', label: 'Email', value: 'info@g5homes.in', sub: 'We reply within 24 hours' },
     { icon: '🌐', label: 'Website', value: 'www.g5homes.in', sub: 'Explore our projects' },

@@ -6,6 +6,8 @@ import Contact from "./pages/Contact";
 import ServicesPage from "./pages/Services";
 import Blog from "./pages/Blog";
 import AdminPanel from "./pages/AdminPanel";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 // Scrolls to top instantly whenever the route changes
 function ScrollToTop() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         {/* ── Admin panel — only accessible via direct URL ── */}
         <Route path="/g5-admin" element={<AdminPanel />} />
       </Routes>

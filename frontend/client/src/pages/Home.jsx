@@ -11,6 +11,7 @@ import smart from '../assets/smarthome.webp';
 import interior from '../assets/interiors.webp';
 import abouthome from '../assets/abouthome.webp';
 import { Helmet } from "react-helmet";
+import SocialSidebar from '../components/SocialSidebar';
 
 // Image optimization helper
 const ResponsiveImage = ({ src, alt, style, className, onMouseEnter, onMouseLeave, priority = false }) => {
@@ -930,6 +931,10 @@ export default function G5HomesPage() {
                 width: 24px !important;
             }
         }
+
+        @media (max-width: 768px) {
+    footer { padding-bottom: 52px !important; }
+}
 
         @media (max-width: 320px) {
             /* Extreme edge case fine-tuning */
@@ -1903,7 +1908,7 @@ export default function G5HomesPage() {
                     </div>
                 </div>
             </section>
-
+<SocialSidebar />
             {/* Footer Component */}
             <Footer />
         </div>

@@ -502,7 +502,7 @@ export default function Footer() {
                             </Link>
 
                             <Link
-                                to="/terms"
+                                to="/terms-and-conditions"
                                 className="footer-bottom-link"
                             >
                                 Terms of Use
