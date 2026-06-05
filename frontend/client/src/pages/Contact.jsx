@@ -75,7 +75,7 @@ const servicesList = [
     'Luxury villa planning and design',
     'Interior design and landscaping services',
     'Construction cost estimation',
-    'Turnkey home construction solutions',
+    'Flats and apartments',
     'Smart and sustainable home development',
 ];
 
@@ -567,7 +567,7 @@ export default function Contact() {
                                                     <option value="luxury-villa">Luxury Villa Planning & Design</option>
                                                     <option value="interior">Interior Design & Landscaping</option>
                                                     <option value="cost-estimate">Construction Cost Estimation</option>
-                                                    <option value="turnkey">Turnkey Home Construction</option>
+                                                    <option value="flats-apartments">Flats and Apartments</option>
                                                     <option value="smart-home">Smart & Sustainable Home Development</option>
                                                     <option value="renovation">Renovation Home</option>
                                                 </select>

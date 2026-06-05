@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import G5Logo from './G5Logo';
+import GetInTouchPopup from './GetInTouchPopup';
 
 const C = {
     navy: '#0A1535',
@@ -17,6 +18,7 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -57,6 +59,11 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
         transition: 'color 0.3s ease',
         position: 'relative',
     });
+
+    const handleGetInTouchClick = (e) => {
+        e.preventDefault();
+        setShowPopup(true);
+    };
 
     return (
         <>
@@ -119,16 +126,19 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                     </Link>
                 ))}
 
-                <Link
-                    to="/contact"
+                <button
+                    onClick={() => {
+                        setMenuOpen(false);
+                        setShowPopup(true);
+                    }}
                     style={{
                         padding: '16px 48px', fontSize: 11, fontWeight: 600,
                         letterSpacing: 3, borderRadius: 40, marginTop: 16,
                         background: `linear-gradient(135deg, ${C.red}, #A01F20)`,
                         color: C.white, textDecoration: 'none',
-                        transition: 'all 0.3s ease', display: 'inline-block'
+                        transition: 'all 0.3s ease', display: 'inline-block',
+                        border: 'none', cursor: 'pointer'
                     }}
-                    onClick={() => setMenuOpen(false)}
                     onMouseEnter={e => {
                         e.currentTarget.style.transform = 'translateY(-3px)';
                         e.currentTarget.style.boxShadow = '0 16px 32px rgba(192,41,42,0.3)';
@@ -138,8 +148,8 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                         e.currentTarget.style.boxShadow = 'none';
                     }}
                 >
-                    <span>Talk to an Agent</span>
-                </Link>
+                    <span>Get in Touch →</span>
+                </button>
             </nav>
 
             {/* ================= DESKTOP NAVBAR ================= */}
@@ -208,8 +218,8 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                             </Link>
                         ))}
 
-                        <Link
-                            to="/contact"
+                        <button
+                            onClick={handleGetInTouchClick}
                             style={{
                                 padding: '12px 32px', fontSize: 11, fontWeight: 600,
                                 letterSpacing: 2.5, borderRadius: 40, whiteSpace: 'nowrap',
@@ -217,7 +227,9 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                                 color: C.white, textDecoration: 'none',
                                 transition: 'all 0.35s cubic-bezier(0.22,1,0.36,1)',
                                 display: 'inline-block',
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                border: 'none',
+                                cursor: 'pointer'
                             }}
                             onMouseEnter={(e) => {
                                 setCursorActive && setCursorActive(true);
@@ -231,7 +243,7 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                             }}
                         >
                             <span>Get in Touch →</span>
-                        </Link>
+                        </button>
                     </div>
                 )}
 
@@ -255,6 +267,9 @@ export default function Navbar({ scrolled, menuOpen, setMenuOpen, setCursorActiv
                     </button>
                 )}
             </nav>
+
+            {/* Get In Touch Popup */}
+            <GetInTouchPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
         </>
     );
 }

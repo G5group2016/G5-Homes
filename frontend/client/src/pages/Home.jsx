@@ -121,8 +121,8 @@ const services = [
     },
     {
         icon: '🔧',
-        title: 'Turnkey Construction Projects',
-        desc: "From concept to completion, our turnkey construction services ensure a seamless and stress-free building experience.",
+        title: 'Flats and Apartments',
+        desc: "From compact studios to spacious multi-bedroom residences, we build flats and apartments that elevate everyday living through intelligent design, quality craftsmanship, and refined interiors.",
         features: ['Project Management', 'Quality Assurance', 'Warranty Support']
     },
     {
@@ -190,7 +190,7 @@ const whyChoosePoints = [
     },
     {
         title: 'Luxury Villas & Premium Living Spaces',
-        desc: 'From elegant villas to modern premium residences, G5 Homes creates refined living environments with contemporary architecture and timeless aesthetics.',
+        desc: 'From elegant villas to modern premium residences, G5 Homes creates refined living flats and apartments with contemporary architecture and timeless aesthetics.',
         icon: '✨'
     }
 ];
@@ -1908,7 +1908,7 @@ export default function G5HomesPage() {
                     </div>
                 </div>
             </section>
-<SocialSidebar />
+            <SocialSidebar />
             {/* Footer Component */}
             <Footer />
         </div>
