@@ -140,7 +140,7 @@ const sections = [
             },
             {
                 subtitle: 'How to Exercise Your Rights',
-                text: 'To exercise any of these rights, please contact our team at info@g5homes.in or call +91 9562100007. We will respond to your request within 30 days.'
+                text: 'To exercise any of these rights, please contact our team at info@g5homes.in or call +91 9074525538. We will respond to your request within 30 days.'
             }
         ]
     },
@@ -590,7 +590,7 @@ export default function PrivacyPolicy() {
                                 <div className="pp-contact-grid">
                                     {[
                                         { icon: '📧', label: 'Email', value: 'info@g5homes.in', href: 'mailto:info@g5homes.in' },
-                                        { icon: '📞', label: 'Phone', value: '+91 9562100007', href: 'tel:+919562100007' },
+                                        { icon: '📞', label: 'Phone', value: '+91 9074525538', href: 'tel:+919074525538' },
                                         { icon: '📍', label: 'Address', value: 'NH 66, Edavilakam, Pachalloor, Thiruvananthapuram, Kerala 695027', href: null },
                                         { icon: '🕐', label: 'Hours', value: 'Mon – Sat: 9AM – 5:30PM IST', href: null },
                                     ].map((c, i) => (

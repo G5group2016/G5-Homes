@@ -170,7 +170,7 @@ export default function GetInTouchPopup({ isOpen, onClose }) {
     };
 
     const handleCallNow = () => {
-        window.location.href = "tel:+919562100007";
+        window.location.href = "tel:+919074525538";
     };
 
     const handleSubmit = async (e) => {
@@ -707,14 +707,14 @@ export default function GetInTouchPopup({ isOpen, onClose }) {
                                     <MailIcon /> Fill Contact Form
                                 </button>
                                 <button className="contact-btn secondary" onClick={handleCallNow}>
-                                    <PhoneIcon /> Call Now: +91 9562100007
+                                    <PhoneIcon /> Call Now: +91 9074525538
                                 </button>
                             </div>
 
                             <div className="or-divider">OR</div>
 
                             <div className="contact-number">
-                                <a href="https://wa.me/919562100007?text=Hello%20G5%20Homes,%20I%20would%20like%20to%20know%20more%20about%20your%20home%20construction%20services."
+                                <a href="https://wa.me/919074525538?text=Hello%20G5%20Homes,%20I%20would%20like%20to%20know%20more%20about%20your%20home%20construction%20services."
                                     target="_blank"
                                     rel="noreferrer"
                                     className="number-display">
