@@ -1113,7 +1113,7 @@ export default function G5HomesPage() {
                         opacity: 0,
                     }}>
                         <a
-                            href="https://wa.me/9074525538?text=Hello%20G5%20Homes,%20I%20am%20interested%20in%20building%20my%20dream%20home.%20I%20would%20like%20to%20get%20a%20free%20consultation."
+                            href="https://wa.me/6282582923?text=Hello%20G5%20Homes,%20I%20am%20interested%20in%20building%20my%20dream%20home.%20I%20would%20like%20to%20get%20a%20free%20consultation."
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-premium"
@@ -1789,7 +1789,7 @@ export default function G5HomesPage() {
                         </p>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                            {[['📍', 'Head Office: G5 Group, NH 66, Edavilakam, Pachalloor, Tvm, Kerala, India- 695027'], ['📞', '+91 9074525538'], ['✉️', 'info@g5homes.in'], ['🕐', 'Mon – Sat: 9AM – 5:30PM IST']].map(([icon, val], i) => (
+                            {[['📍', 'Head Office: G5 Group, NH 66, Edavilakam, Pachalloor, Tvm, Kerala, India- 695027'], ['📞', '+91 6282582923'], ['✉️', 'info@g5homes.in'], ['🕐', 'Mon – Sat: 9AM – 5:30PM IST']].map(([icon, val], i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                                     <div style={{ width: 42, height: 42, background: `linear-gradient(135deg,${C.offWhite},${C.lightGray})`, border: `1px solid rgba(14,27,77,0.08)`, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 17 }}>{icon}</div>
                                     <span style={{ fontSize: 13, color: '#5A6380', lineHeight: 1.7, paddingTop: 10, fontFamily: "'Inter', sans-serif" }}>{val}</span>

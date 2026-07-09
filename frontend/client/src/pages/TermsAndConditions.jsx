@@ -633,7 +633,7 @@ export default function TermsAndConditions() {
                                 <div className="pp-contact-grid">
                                     {[
                                         { icon: '📧', label: 'Email', value: 'info@g5homes.in', href: 'mailto:info@g5homes.in' },
-                                        { icon: '📞', label: 'Phone', value: '+91 9074525538', href: 'tel:+919074525538' },
+                                        { icon: '📞', label: 'Phone', value: '+91 6282582923', href: 'tel:+916282582923' },
                                         { icon: '📍', label: 'Address', value: 'NH 66, Edavilakam, Pachalloor, Thiruvananthapuram, Kerala 695027', href: null },
                                         { icon: '🕐', label: 'Hours', value: 'Mon – Sat: 9AM – 5:30PM IST', href: null },
                                         { icon: '⚖️', label: 'Legal Notices', value: 'legal@g5homes.in', href: 'mailto:legal@g5homes.in' },
